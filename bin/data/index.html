@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ws client test page</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    console.log("hello");
+
+    function checkBrowser() {
+        if (window.WebSocket) {
+            console.log("This browser supports WebSocket!");
+        } else {
+            console.log("This browser does not support WebSocket.");
+        }
+    }
+
+    function setup() {
+        var wsServer = 'ws://localhost:8080';
+        var ws = new WebSocket(wsServer);
+
+        ws.onopen = function(e) {
+            console.log("Connected to WebSocket server.", e);
+            sendMessage("Conan");
+        };
+
+        ws.onclose = function(e) {
+            console.log("Disconnected", e);
+        };
+
+        ws.onmessage = function(e) {
+            // console.log("RECEIVED: " + JSON.parse(e.data)[0], e);
+            console.log("RECEIVED: " + e.data);
+
+            // ws.close();
+        }
+
+        ws.onerror = function(e) {
+            console.log('Error occured: ' + e.data, e);
+        };
+
+        var sendMessage = function(msg) {
+            ws.send(msg);
+            console.log("SEND : " + msg);
+        }
+    }
+
+    checkBrowser();
+    setup();
+    </script>
+</body>
+
+</html>
