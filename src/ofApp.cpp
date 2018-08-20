@@ -113,6 +113,7 @@ void ofApp::keyPressed(int key){
 		messages.push_back("Sent: '" + toSend + "' to "+ ofToString(server.getConnections().size())+" websockets" );
 		toSend = "";
 	}
+	
 }
 
 //--------------------------------------------------------------
